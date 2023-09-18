@@ -13,12 +13,12 @@ const EventList = () => {
   const { data, error } = useData();
   const [type, setType] = useState();
   const [currentPage, setCurrentPage] = useState(1);
-  const allEvents = data?.events
+  const allEvents = data?.events ? data.events : []
   const [events, setEvents] = useState(allEvents)
   
   useEffect(() => {
     setEvents(!type || type === "toutes" ? allEvents : allEvents.filter((event => event.type === type)))
-  },[type])
+  },[type, allEvents])
 
 const onePageFilteredEvents = events.slice((currentPage - 1) * PER_PAGE, currentPage * PER_PAGE);
 

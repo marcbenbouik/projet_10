@@ -13,11 +13,10 @@ import Modal from "../../containers/Modal";
 import { useData } from "../../contexts/DataContext";
 
 const Page = () => {
-  const {data} = useData()
+  const { data } = useData()
   const last = data?.events.sort((evtA, evtB) =>
   new Date(evtA.date) < new Date(evtB.date) ? -1 : 1
 )[0];
-if(!last) return null;
   return <>
     <header>
       <Menu />
@@ -120,13 +119,13 @@ if(!last) return null;
     <footer className="row">
       <div className="col presta">
         <h3>Notre derniére prestation</h3>
-        <EventCard
+        {last ? (<EventCard
         imageSrc={last.cover}
         title={last.title}
         date={new Date(last.date)}
           small
           label="boom"
-        />
+        />) : null}
       </div>
       <div className="col contact">
         <h3>Contactez-nous</h3>
